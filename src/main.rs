@@ -21,7 +21,7 @@ macro_rules! performance {
 // main function.
 fn main() {
     let mut a = vec![];
-    for _ in 0..10000 { a.push(rand::thread_rng().gen::<u8>()); }
+    for _ in 0..10000 { a.push(rand::thread_rng().gen::<u16>()); }
     //let a = vec![10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
     let mut r = a.clone();
     r.sort();
@@ -46,4 +46,8 @@ fn main() {
     let mut _heap = a.clone();
     performance!("Heap Sort  ", { sort::heap::sort(&mut _heap); });
     assert_eq!(_heap, r);
+
+    let mut _quick = a.clone();
+    performance!("Quick Sort ", { sort::quick::sort(&mut _quick); });
+    assert_eq!(_quick, r);
 }

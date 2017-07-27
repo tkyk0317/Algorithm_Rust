@@ -1,5 +1,5 @@
 // ヒープソート.
-pub fn sort<T: PartialOrd+Clone>(a: &mut Vec<T>) {
+pub fn sort<T: Ord+Clone>(a: &mut Vec<T>) {
     let mut len = a.len();
     while len > 0 {
         // ヒープを作成し、先頭と最後の要素を入れ替える.
@@ -10,7 +10,7 @@ pub fn sort<T: PartialOrd+Clone>(a: &mut Vec<T>) {
 }
 
 // ヒープ作成.
-fn create_heap<T: PartialOrd>(len: usize, a: &mut Vec<T>) {
+fn create_heap<T: Ord>(len: usize, a: &mut Vec<T>) {
     let mut p = len / 2;
     loop {
         let mut s = p;

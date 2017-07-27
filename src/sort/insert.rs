@@ -1,5 +1,5 @@
 // 挿入ソート.
-pub fn sort<T: PartialOrd + Clone>(a: &mut Vec<T>) {
+pub fn sort<T: Ord + Clone>(a: &mut Vec<T>) {
     for i in 1..a.len() {
         let mut j = i;
         while 0 < j && a[j - 1] > a[j] {
