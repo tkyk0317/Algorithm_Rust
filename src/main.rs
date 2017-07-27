@@ -1,7 +1,7 @@
 extern crate rand;
 
 use rand::Rng;
-use std::time::{Duration, Instant};
+use std::time::{Instant};
 
 mod sort;
 
@@ -12,7 +12,7 @@ macro_rules! performance {
       let start = Instant::now();
       let result = $x;
       let end = start.elapsed();
-      println!("{}{}.{:06} sec", $t, end.as_secs(), end.subsec_nanos() / 1_000_000);
+      println!("[{}] {}.{:09} sec", $t, end.as_secs(), end.subsec_nanos());
       result
     }
   };
@@ -21,9 +21,29 @@ macro_rules! performance {
 // main function.
 fn main() {
     let mut a = vec![];
-    for _ in 0..100000 { a.push(rand::thread_rng().gen::<u8>()); }
+    for _ in 0..10000 { a.push(rand::thread_rng().gen::<u8>()); }
+    //let a = vec![10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+    let mut r = a.clone();
+    r.sort();
+
+    println!("---------------------------------------");
+    println!("[sort] Item Count: {}", a.len());
+    println!("---------------------------------------");
+
     // sort.
-    performance!("Rust Standard Sort: ", { a.clone().sort(); });
-    performance!("Insert Sort       : ", { sort::insert::sort(&mut a.clone()) });
-    performance!("Select Sort       : ", { sort::select::sort(&mut a.clone()); });
+    let mut _standard = a.clone();
+    performance!("Vec::sort  ", { _standard.sort(); });
+    assert_eq!(_standard, r);
+
+    let mut _insert = a.clone();
+    performance!("Insert Sort", { sort::insert::sort(&mut _insert); });
+    assert_eq!(_insert, r);
+
+    let mut _select = a.clone();
+    performance!("Select Sort", { sort::select::sort(&mut _select); });
+    assert_eq!(_select, r);
+
+    let mut _heap = a.clone();
+    performance!("Heap Sort  ", { sort::heap::sort(&mut _heap); });
+    assert_eq!(_heap, r);
 }
