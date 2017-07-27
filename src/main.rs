@@ -50,4 +50,8 @@ fn main() {
     let mut _quick = a.clone();
     performance!("Quick Sort ", { sort::quick::sort(&mut _quick); });
     assert_eq!(_quick, r);
+
+    let mut _bubble = a.clone();
+    performance!("Bubble Sort ", { sort::bubble::sort(&mut _bubble); });
+    assert_eq!(_bubble, r);
 }
