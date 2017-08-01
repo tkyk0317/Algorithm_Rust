@@ -5,3 +5,4 @@ authors = ["takayuki <takayuki.1981.0317@gmail.com>"]
 
 [dependencies]
 rand = "*"
+libc = "*"
