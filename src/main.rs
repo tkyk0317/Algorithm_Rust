@@ -92,4 +92,8 @@ fn main() {
     let mut _bubble = a.clone();
     performance!("Bubble Sort", { sort::bubble::sort(&mut _bubble); });
     assert_eq!(_bubble, r);
+
+    let mut _merge = a.clone();
+    performance!("Merge Sort ", { sort::merge::sort(&mut _merge); });
+    assert_eq!(_merge, r);
 }
